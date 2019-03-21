@@ -2,6 +2,7 @@ library(shiny)
 library(ggplot2)
 library(ggvegan)
 library(svglite)
+library(grDevices)
 
 ui <- shinyUI(fluidPage(
         titlePanel("Curvas de Acumulacion"),
@@ -38,6 +39,7 @@ ui <- shinyUI(fluidPage(
                                  sidebarPanel( numericInput("a", "Ancho(cm):", 7, min = 2, max = 50),
                                                numericInput("l", "Altura(cm):", 7, min = 2, max = 50),
                                                numericInput("p", "Permutaciones", 100, min = 1, max = 20000),
+                                               radioButtons("device", "Formato", choices = c("png", "svg"), selected = "svg"),
                                                textInput(inputId = "x", label = "Unidades de Muestreo", value = "", placeholder = "Titulo del eje X"),
                                                downloadButton('Plot')
                                                
@@ -106,9 +108,10 @@ server <- shinyServer(function(input, output, session) {
         
         
         output$Plot = downloadHandler(
-                filename = function() { paste("Curva", Sys.Date(), '.svg', sep='') },
+                filename = function() { paste("Curva", Sys.Date(), paste0(".", input$device), sep='') },
+                
                 content = function(file) {
-                        ggsave(file, plot = grafico(), device =  svg(), units = "cm", width = input$a, height = input$l)
+                        ggsave(file, plot = grafico(), device =  input$device, units = "cm", width = input$a, height = input$l, dpi = 1000)
                 })
         
         Eficiencia <- reactive({
