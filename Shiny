@@ -105,7 +105,7 @@ server <- shinyServer(function(input, output, session) {
         })
         
         
-        output$Plot = downloadHa2ndler(
+        output$Plot = downloadHandler(
                 filename = function() { paste("Curva", Sys.Date(), '.svg', sep='') },
                 content = function(file) {
                         ggsave(file, plot = grafico(), device =  svg(), units = "cm", width = input$a, height = input$l)
