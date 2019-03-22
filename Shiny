@@ -36,8 +36,8 @@ ui <- shinyUI(fluidPage(
                 tabPanel("Grafico de las Curvas",
                          pageWithSidebar(
                                  headerPanel('Especificaciones'),
-                                 sidebarPanel( numericInput("a", "Ancho(cm):", 7, min = 2, max = 50),
-                                               numericInput("l", "Altura(cm):", 7, min = 2, max = 50),
+                                 sidebarPanel( numericInput("a", "Ancho(cm):", 8, min = 2, max = 50),
+                                               numericInput("l", "Altura(cm):", 16, min = 2, max = 50),
                                                numericInput("p", "Permutaciones", 100, min = 1, max = 20000),
                                                radioButtons("device", "Formato", choices = c("png", "svg"), selected = "svg"),
                                                textInput(inputId = "x", label = "Unidades de Muestreo", value = "", placeholder = "Titulo del eje X"),
