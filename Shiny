@@ -4,7 +4,7 @@ library(ggvegan)
 
 
 ui <- shinyUI(fluidPage(
-        titlePanel("Curvas de Acumulacion"),
+        titlePanel("Curvas de Acumulación"),
         tabsetPanel(
                 tabPanel("Tabla de Abundancia",
                          titlePanel("Cargando Archivos"),
@@ -32,13 +32,13 @@ ui <- shinyUI(fluidPage(
                                  )
                          )
                 ),
-                tabPanel("Grafico de las Curvas",
+                tabPanel("Gráfico de las Curvas",
                          pageWithSidebar(
                                  headerPanel('Especificaciones'),
                                  sidebarPanel( numericInput("a", "Ancho(cm):", 7, min = 2, max = 50),
                                                numericInput("l", "Largo(cm):", 7, min = 2, max = 50),
                                                numericInput("p", "Permutaciones", 100, min = 1, max = 20000),
-                                               textInput(inputId = "x", label = "Unidades de Muestreo", value = "", placeholder = "Titulo del eje X"),
+                                               textInput(inputId = "x", label = "Unidades de Muestreo", value = "", placeholder = "Título del eje X"),
                                                downloadButton('Plot')
                                                
                                                
@@ -96,7 +96,7 @@ server <- shinyServer(function(input, output, session) {
                 print(pool1)
                 pool <- fortify(pool1)
                 p <- ggplot(pool, aes(x = Size, y = Richness, colour = Index)) + geom_line() + theme_classic()
-                p1 <- p + geom_ribbon(aes(ymin = Lower, ymax = Upper, fill = Index), linetype = 0, alpha = 0.1) + labs(x = input$x, y = "Riqueza", colour = "Indices", fill = "Indices")
+                p1 <- p + geom_ribbon(aes(ymin = Lower, ymax = Upper, fill = Index), linetype = 0, alpha = 0.1) + labs(x = input$x, y = "Riqueza", colour = "Indices", fill = "Índices")
                 print(p1) })
         
         
